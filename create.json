@@ -1,0 +1,70 @@
+{
+    "addresses": [
+        {
+            "type": "work",
+            "value": "A010205"
+        }
+    ],
+    "preferredLanguage": "ko",
+    "timezone": "KST",
+    "roles": [
+        {
+            "type": "default",
+            "value": "Internal/everyone"
+        },
+        {
+            "display": "everyone"
+        }
+    ],
+    "title": "Senior Engineer",
+    "userName": "kim2",
+	"password": "abc1234!",	
+    "phoneNumbers": [
+        {
+            "type": "work",
+            "value": "82-02-865-0701"
+        },
+        {
+            "type": "mobile",
+            "value": "01053226372"
+        }
+    ],
+    "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+        "enOrganization": "Samsung Display",
+        "busiName": "(K) Kiheung Campus",
+        "nativeYn": "N",
+        "userStatus": "B",
+        "departmentCode": "C114AAA4",
+        "regionName": "(K) YongIn",
+        "busiCode": "KKR022SDC",
+        "disabledDate": "20210821",
+        "epId": "M210426050650C114449",
+        "titleCode": "ZE501",
+        "userClassify": "R",
+        "employeeNumber": "1234A",
+        "securityLevel": "1",
+        "enSubOrgName": "HeadQuater",
+        "subOrgName": "(K) SuborgName",
+        "enGivenName": "kim",
+        "enTitle": "Senior Engineer",
+        "organizationCode": "C11",
+        "subOrgId": "SDCHQ",
+        "organization": "(K)Organiztion",
+        "accountDisabled": true,
+        "region": "A010205",
+        "department": "(K) department"
+    },
+    "emails": [
+        "byunghyup.kim@partner.samsung.com"
+    ],
+    "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User",
+        "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User"
+    ],
+    "name": {
+        "formatted": "K full name",
+        "givenName": "Kim",
+        "familyName": "Berry"
+    },
+    "userType": "U"
+}

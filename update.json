@@ -1,0 +1,25 @@
+{
+  "schemas": [],
+  "name": {
+    "givenName": "Kim",
+    "familyName": "Berry3"
+  },
+  "userName": "kim2",
+  "emails": [
+    {
+      "type": "home",
+      "value": "kim@gmail.com",
+      "primary": true
+    },
+    {
+      "type": "work",
+      "value": "kim@wso2.com"
+    }
+  ],
+  "urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+    "employeeNumber": "1234133333A",
+    "manager": {
+      "value": "Taylor"
+    }
+  }
+}

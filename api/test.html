@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <title></title>
+</head>
+
+<body>
+
+  <span id="resultArea"></span>
+  <input type="button" name="" value="request" id="api">
+</body>
+<script>
+  $("#api").click(function(){
+    console.log("3333");
+    // $("resultArea").append("클릭됨");
+
+    $.ajax({
+    type: "GET",
+    url: `/requestApi`,
+    data: {
+      //
+    },
+    success: function(res) {
+      console.log("33");
+
+
+    }, //success func end
+
+  }); //ajax end\
+  })
+</script>
+
