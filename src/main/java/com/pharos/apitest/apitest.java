@@ -29,37 +29,49 @@ public class apitest {
 
 		String basicURL = "https://is.pharos.com:9443/";
 		apitest http = new apitest();
+		
 		System.out.println("SSL 인증서 무시");
 		http.disableSslVerication();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println("GET으로 데이터 가져오기");
-//		http.sendGet("https://naver.com");
+		String command = br.readLine();
+		if (command.equals("get")) {
+			System.out.println("GET으로 데이터 가져오기");
+//			http.sendGet("https://naver.com");
 
-		http.getUserByID(basicURL + "scim2/Users/b388b0dc-a0b4-4172-8f88-b78d2136b138");
+			http.getUserByID(basicURL + "scim2/Users/b388b0dc-a0b4-4172-8f88-b78d2136b138");
+		} else if (command.equals("post")) {
+			System.out.println("유저 생성(POST)");
 
-		System.out.println("유저 생성(POST)");
+			JSONParser parser = new JSONParser();
+			Reader createJson = new FileReader("C:\\Users\\pharos_1\\Documents\\code\\github\\apitest\\create.json");
+			// json 파일 불러와서 파싱
+
+			JSONObject createJsonObject = (JSONObject) parser.parse(createJson);
+			// 파싱한 값을 jsonObject에 담음
+			String createParameters = "";
+			
+			http.createUser(basicURL + "scim2/Users/", createJsonObject.toString());
+			// object 타입을 문자열로 치환
+		} else if (command.equals("update")) {
+			JSONParser parser = new JSONParser();
+			System.out.println("유저 업데이트(UPDATE)");
+			Reader updateJson = new FileReader("C:\\Users\\pharos_1\\Documents\\code\\github\\apitest\\update.json");
+
+			JSONObject updateJsonObject = (JSONObject) parser.parse(updateJson);
+			http.updateUser(basicURL
+					+ "scim2/Users/e84c2dc4-4fd6-4798-9794-8eb03afbcbc4?attributes=familyName&excludedAttributes=employeeNumber",
+					updateJsonObject.toString());
+		} else if (command.equals("delete")) {
+			System.out.println("유저 삭제(DELETE)");
+			http.deleteUser(basicURL + "scim2/Users/e84c2dc4-4fd6-4798-9794-8eb03afbcbc4");
+		} else {
+			System.out.println("해당 명령은 존재하지 않습니다.");
+			br.close();
+		}
 		
-		JSONParser parser = new JSONParser();
-		Reader createJson = new FileReader("C:\\Users\\pharos_1\\Downloads\\apitest\\apitest\\create.json");
-		//json 파일 불러와서 파싱
-		
-		JSONObject createJsonObject = (JSONObject) parser.parse(createJson);
-		//파싱한 값을 jsonObject에 담음
-//		String createParameters = "";
-//
-//		http.createUser(basicURL + "scim2/Users/", createJsonObject.toString());
-		//object 타입을 문자열로 치환
-		
-		System.out.println("유저 업데이트(UPDATE)");
-		Reader updateJson = new FileReader("C:\\Users\\pharos_1\\Downloads\\apitest\\apitest\\update.json");
-		
-		JSONObject updateJsonObject = (JSONObject) parser.parse(updateJson);
-		http.updateUser(basicURL + "scim2/Users/af2df6d1-5a4d-4a53-8968-ab19779b340e?attributes=familyName&excludedAttributes=employeeNumber", 
-				updateJsonObject.toString());
-		
-		
-		System.out.println("유저 삭제(DELETE)");
-		http.deleteUser(basicURL + "scim2/Users/af2df6d1-5a4d-4a53-8968-ab19779b340e");
+
 	}
 
 	private void getUserByID(String targetUrl) throws Exception {
@@ -123,13 +135,13 @@ public class apitest {
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-				
+
 		in.close();
-		
+
 		System.out.println("응답코드 " + responseCode);
 		System.out.println("HTTP body : " + response.toString());
 	}
-	
+
 	private void updateUser(String targetUrl, String parameters) throws IOException {
 		URL url = new URL(targetUrl);
 		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
@@ -160,20 +172,20 @@ public class apitest {
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-				
+
 		in.close();
-		
+
 		System.out.println("응답코드 " + responseCode);
 		System.out.println("HTTP body : " + response.toString());
 	}
-	
+
 	private void deleteUser(String targetUrl) throws Exception {
 
 		URL url = new URL(targetUrl);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-		String base64 = "Basic YWRtaW46YWRtaW4="; 
-		String accept = "application/scim+json"; 
+		String base64 = "Basic YWRtaW46YWRtaW4=";
+		String accept = "application/scim+json";
 
 		con.setRequestMethod("DELETE");
 		con.setRequestProperty("Authorization", base64);
